@@ -6,10 +6,10 @@ Picchio - filepicker.io uploader
 
 Modules
 -------------
-*   Optimist
-*   Needle
-*   Fs
-*   Path
+*   [Optimist](https://npmjs.org/package/optimist)
+*   [Needle](https://npmjs.org/package/needle)
+*   [Fs](http://nodejs.org/api/fs.html)
+*   [Path](http://nodejs.org/api/path.html)
 
 Use it
 ------
@@ -47,8 +47,8 @@ Author
 ------
 Name:       Domenico Leone Luciani
 
-Site:       http://dlion.it
+Site:       [http://dlion.it](http://dlion.it)
 
-Twitter:    @dlion92
+Twitter:    [@dlion92](http://twitter.com/dlion92)
 
 email:      domenicoleoneluciani [@] gmail [.] com
