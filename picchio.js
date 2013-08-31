@@ -3,6 +3,8 @@ var func        = require('./func'),
     .usage("Usage: $0 [options] -f [target1] -f [target2] -f [...]")
     .alias("a", "api")
     .describe("a", "Set API key")
+    .alias("d", "delete")
+    .describe("d", "Delete file")
     .alias("f", "file")
     .describe("f", "File to upload")
     .alias("h", "help")
@@ -13,13 +15,16 @@ var func        = require('./func'),
     .describe("w", "Print author's name")
     .alias("v", "version")
     .describe("v", "Print version's script")
-    .demand('f');
 
 var argv        = optimist.argv;
 
 // Select options
 
-if(argv.f) {
+if(argv.d) {
+    var API     = (argv.a) ? argv.a : false;
+    func.down(argv.d,API);
+}
+else if(argv.f) {
     var API     = (argv.a) ? argv.a : false;
     var SHOW    = (argv.s) ? true   : false;
     func.up(argv.f,API,SHOW);

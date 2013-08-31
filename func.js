@@ -94,3 +94,26 @@ exports.up = function(files, api, show) {
         });
     }
 };
+
+exports.putDown = function(api, file) {
+    needle.delete(file+"?key="+api);
+    console.log(file+" [DELETED]");
+};
+
+exports.down = function(files, api) {
+    if(!api && config.API.length == 0) {
+        exports.error("API KEY IS REQUIRED");
+    }
+    else if(!api) {
+        api = config.API;
+    }
+
+    if(files.constructor === Array) {
+        files.forEach(function(file) {
+            exports.putDown(api,file);
+        });
+    }
+    else {
+        exports.putDown(api, files);
+    }
+};

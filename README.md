@@ -1,7 +1,7 @@
-Picchio - filepicker.io uploader
+Picchio - filepicker.io manager
 ================================
 
-*Picchio* it's a simple CLI script wrote in Node.js to upload many files into filepicker.io
+*Picchio* it's a simple CLI script wrote in Node.js to manage many files into filepicker.io
 
 
 Modules
@@ -25,7 +25,7 @@ After taht pass your files and will receive links
 Example1
 -------
 ```sh
-node picchio -f README.md -a "jnkdnjdnfj"
+node picchio -f README.md -a "APIKEY"
 ```
 
 Example2
@@ -42,6 +42,16 @@ You can view usage passing `-h` parameter
 Show File
 ---------
 When filepicker.io send you a link, when you will visit it you can just download file but if you use `-s` parameter you can view it into your browser
+
+Delete Files
+------------
+You can pass you file's link and delete it
+
+Example3
+--------
+```sh
+node picchio -a "APIKEY" -d "LINK1" -d "LINK2"
+```
 
 Author
 ------
