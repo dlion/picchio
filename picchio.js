@@ -1,4 +1,5 @@
-var func = require('./func');
+var func = require('./func'),
+    argv = require('optimist').argv;
 
 if(process.argv.length > 2) {
     process.argv.splice(2).forEach(function(file, index) {
