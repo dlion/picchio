@@ -38,3 +38,6 @@ else if(argv.w) {
 else if(argv.v) {
     func.version();
 }
+else {
+    optimist.showHelp();
+}
