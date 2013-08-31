@@ -96,8 +96,9 @@ exports.up = function(files, api, show) {
 };
 
 exports.putDown = function(api, file) {
-    needle.delete(file+"?key="+api);
-    console.log(file+" [DELETED]");
+    needle.delete(file+"?key="+api,{key: api},function(err, resp, body) {
+        console.log(file+": "+body);
+    });
 };
 
 exports.down = function(files, api) {
