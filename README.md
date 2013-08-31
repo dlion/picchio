@@ -1,6 +1,5 @@
 Picchio - filepicker.io uploader
 ================================
-Because CLI is CLI
 
 *Picchio* it's a simple CLI script wrote in Node.js to upload many files into filepicker.io
 
@@ -15,9 +14,12 @@ Modules
 Use it
 ------
 *   First of all you must have a filepicker.io account and an API key.
+
 Then you have two choices:
+
 *   Pass API key as parameter
 *   Set API key into config.js file
+
 After taht pass your files and will receive links
 
 Example1
@@ -44,6 +46,9 @@ When filepicker.io send you a link, when you will visit it you can just download
 Author
 ------
 Name:       Domenico Leone Luciani
+
 Site:       http://dlion.it
+
 Twitter:    @dlion92
+
 email:      domenicoleoneluciani [@] gmail [.] com
