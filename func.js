@@ -40,19 +40,16 @@ exports.error = function(error) {
 
 exports.fly = function(api,file,show) {
     var data = {
-        apikey: api,
         fileUpload: { file: file, content_type: 'application/octet-stream' }
     };
 
-    needle.post(config.URL+file, data, { multipart: true}, function(err, resp, body) {
+    needle.post(config.URL+api, data, { multipart: true}, function(err, resp, body) {
         if(!err) {
-            for(index in body.data) {
-                var RESPONSE = file + ": " + body.data[index].url;
-                if(show) {
-                    RESPONSE += "?dl=false";
-                }
-                console.log(RESPONSE);
+            var RESPONSE = file + ": " + body.url;
+            if(show) {
+                RESPONSE += "?dl=false";
             }
+            console.log(RESPONSE);
         }
         else {
             exports.error(err);
