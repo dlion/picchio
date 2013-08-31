@@ -62,4 +62,4 @@ Site:       [http://dlion.it](http://dlion.it)
 
 Twitter:    [@dlion92](http://twitter.com/dlion92)
 
-email:      domenicoleoneluciani [@] gmail [.] com
+Email:      domenicoleoneluciani [@] gmail [.] com
