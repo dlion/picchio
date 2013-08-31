@@ -45,7 +45,8 @@ When filepicker.io send you a link, when you will visit it you can just download
 
 Delete Files
 ------------
-You can pass you file's link and delete it
+You can pass you file's link and delete it using `-d` parameter
+*APIKEY is required*
 
 Example3
 --------
