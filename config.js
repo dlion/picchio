@@ -1,7 +1,8 @@
 var config = {};
 module.exports = config;
 
+config.TITLE    =   "Picchio File Uploader";
 config.VERSION  =   "1.0A";
-config.SITE     =   "https://www.filepicker.io";
+config.URL     =   "https://www.filepicker.io/api/path/storage/";
 config.API      =   ""; //INSERT HERE YOUR API KEY
 
