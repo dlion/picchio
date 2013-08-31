@@ -1,5 +1,5 @@
 var     config  =   require('./config'),
-        request =   require('request'),
+        needle  =   require('needle'),
         fs      =   require('fs'),
         path    =   require('path');
 
@@ -34,12 +34,37 @@ exports.error = function(error) {
     process.exit(1);
 };
 
-
 /*
- * Upload File
+ * Upload Files
  */
 
-exports.up = function(files, api, proxy, show) {
+exports.fly = function(api,file,show) {
+    var data = {
+        apikey: api,
+        fileUpload: { file: file, content_type: 'application/octet-stream' }
+    };
+
+    needle.post(config.URL+file, data, { multipart: true}, function(err, resp, body) {
+        if(!err) {
+            for(index in body.data) {
+                var RESPONSE = file + ": " + body.data[index].url;
+                if(show) {
+                    RESPONSE += "?dl=false";
+                }
+                console.log(RESPONSE);
+            }
+        }
+        else {
+            exports.error(err);
+        }
+    });
+};
+
+/*
+ * Process Every Single File
+ */
+
+exports.up = function(files, api, show) {
     if(!api && config.API.length == 0) {
         exports.error("API KEY IS REQUIRED");
     }
@@ -49,40 +74,22 @@ exports.up = function(files, api, proxy, show) {
 
     if(files.constructor === Array) {
         files.forEach(function(file) {
-            if(fs.existsSync(file)) {
-                console.log("PROCESS: "+file);
-                var req = request({
-                    url:    config.URL,
-                    method: 'POST',
-                    form: {
-                        fileUpload: fs.createReadStream(file),
-                        apikey:     api
-                    }
-                }, function(error, resp, body) {
-                    if(!error && resp.statusCode == 200) {
-                        console.log("CORPO:\n"+body);
-                    }
-                    else {
-                        exports.error(error);
-                    }
-                });
-            }
-            else {
-                exports.error(file+" DOESN'T EXISTS");
-            }
+            file = path.resolve(file);
+            fs.exists(file,function(esiste) {
+                if(esiste) {
+                    exports.fly(api,file,show);
+                }
+                else {
+                    exports.error(file+" DOESN'T EXISTS");
+                }
+            });
         });
     }
     else {
-        console.log("NON ARRAY");
+        files = path.resolve(files);
         fs.exists(files,function(esiste) {
             if(esiste) {
-                console.log("PROCESS: "+files+" API: "+api+" PATH: "+path.join(__dirname,files));
-                var req     =   request.post(config.URL+files,function(err, resp, body) {
-                    console.log("BODY: "+body);
-                }).form({
-                    apikey: api,
-                    fileUpload: fs.createReadStream(path.join(__dirname,files))
-                });
+                exports.fly(api,files,show);
             }
             else {
                 exports.error(files+" DOESN'T EXISTS");
@@ -90,4 +97,3 @@ exports.up = function(files, api, proxy, show) {
         });
     }
 };
-
