@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 var func        = require('./func'),
     optimist    = require('optimist')
     .usage("Usage: $0 [options] -f [target1] -f [target2] -f [...]")
