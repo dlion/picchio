@@ -1,0 +1,27 @@
+{
+  "name": "picchio",
+  "version": "1.0.0",
+  "description": "A simple filepicker.io manager",
+  "main": "picchio.js",
+  "dependencies": {
+    "needle": "~0.5.9",
+    "optimist": "~0.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dlion/picchio.git"
+  },
+  "keywords": [
+    "picchio",
+    "filepicker.io"
+  ],
+  "author": "Domenico Leone Luciani aka DLion",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/dlion/picchio/issues"
+  }
+}
