@@ -1,4 +1,4 @@
-var     config  =   require('./config'),
+var     config  =   require('./config.json'),
         needle  =   require('needle'),
         fs      =   require('fs'),
         path    =   require('path');
