@@ -3,10 +3,12 @@ var     config  =   require('./config.json'),
         fs      =   require('fs'),
         path    =   require('path');
 
+
+
+
 /*
  * Show Author's Info
  */
-
 
 exports.author = function() {
     console.log("Author: Domenico Leone Luciani\n"
@@ -30,8 +32,7 @@ exports.version = function() {
  */
 
 exports.error = function(error) {
-    console.log("[ERROR]: "+error);
-    process.exit(1);
+    throw new Error(error);
 };
 
 /*
@@ -109,7 +110,7 @@ exports.down = function(files, api) {
         api = config.API;
     }
 
-    if(files.constructor === Array) {
+    if(typeof files.constructor === Array) {
         files.forEach(function(file) {
             exports.putDown(api,file);
         });
