@@ -3,14 +3,13 @@ var     config  =   require('./config.json'),
         fs      =   require('fs'),
         path    =   require('path');
 
-
-
+var obj = function() {};
 
 /*
  * Show Author's Info
  */
 
-exports.author = function() {
+obj.prototype.author = function() {
     console.log("Author: Domenico Leone Luciani\n"
                 +"Email: domenicoleoneluciani [@] gmail [.] com\n"
                 +"Site: http://dlion.it\n"
@@ -23,7 +22,7 @@ exports.author = function() {
  * Show Version's Info
  */
 
-exports.version = function() {
+obj.prototype.version = function() {
     console.log(config.TITLE+" Version: "+config.VERSION);
 };
 
@@ -31,7 +30,7 @@ exports.version = function() {
  * Error log and exit
  */
 
-exports.error = function(error) {
+obj.prototype.error = function(error) {
     throw new Error(error);
 };
 
@@ -39,10 +38,10 @@ exports.error = function(error) {
  * Upload Files
  */
 
-exports.fly = function(api,file,show) {
+obj.prototype.fly = function(api,file,show) {
     var data = {
         fileUpload: { file: file, content_type: 'application/octet-stream' }
-    };
+    }
 
     needle.post(config.URL+api, data, { multipart: true}, function(err, resp, body) {
         if(!err) {
@@ -53,7 +52,7 @@ exports.fly = function(api,file,show) {
             console.log(RESPONSE);
         }
         else {
-            exports.error(err);
+            obj.prototype.error(err);
         }
     });
 };
@@ -62,49 +61,9 @@ exports.fly = function(api,file,show) {
  * Process Every Single File
  */
 
-exports.up = function(files, api, show) {
+obj.prototype.up = function(files, api, show) {
     if(!api && config.API.length == 0) {
-        exports.error("API KEY IS REQUIRED");
-    }
-    else if(!api) {
-        api = config.API;
-    }
-
-    if(files.constructor === Array) {
-        files.forEach(function(file) {
-            file = path.resolve(file);
-            fs.exists(file,function(esiste) {
-                if(esiste) {
-                    exports.fly(api,file,show);
-                }
-                else {
-                    exports.error(file+" DOESN'T EXISTS");
-                }
-            });
-        });
-    }
-    else {
-        files = path.resolve(files);
-        fs.exists(files,function(esiste) {
-            if(esiste) {
-                exports.fly(api,files,show);
-            }
-            else {
-                exports.error(files+" DOESN'T EXISTS");
-            }
-        });
-    }
-};
-
-exports.putDown = function(api, file) {
-    needle.delete(file+"?key="+api,{key: api},function(err, resp, body) {
-        console.log(file+": "+body);
-    });
-};
-
-exports.down = function(files, api) {
-    if(!api && config.API.length == 0) {
-        exports.error("API KEY IS REQUIRED");
+        obj.prototype.error("API KEY IS REQUIRED");
     }
     else if(!api) {
         api = config.API;
@@ -112,10 +71,52 @@ exports.down = function(files, api) {
 
     if(typeof files.constructor === Array) {
         files.forEach(function(file) {
-            exports.putDown(api,file);
+            file = path.resolve(file);
+            fs.exists(file,function(esiste) {
+                if(esiste) {
+                    obj.prototype.fly(api,file,show);
+                }
+                else {
+                    obj.prototype.error(file+" DOESN'T EXISTS");
+                }
+            });
         });
     }
     else {
-        exports.putDown(api, files);
+        filest = path.resolve(files);
+        fs.exists(filest,function(esiste) {
+            if(esiste) {
+                obj.prototype.fly(api,filest,show);
+            }
+            else {
+                obj.prototype.error(filest+" DOESN'T EXISTS");
+            }
+        });
     }
 };
+
+obj.prototype.putDown = function(api, file) {
+    needle.delete(file+"?key="+api,{key: api},function(err, resp, body) {
+        console.log(file+": "+body);
+    });
+};
+
+obj.prototype.down = function(files, api) {
+    if(!api && config.API.length == 0) {
+        obj.prototype.error("API KEY IS REQUIRED");
+    }
+    else if(!api) {
+        api = config.API;
+    }
+
+    if(typeof files.constructor === Array) {
+        files.forEach(function(file) {
+            obj.prototype.putDown(api,file);
+        });
+    }
+    else {
+        obj.prototype.putDown(api, files);
+    }
+};
+
+module.exports = new obj;
