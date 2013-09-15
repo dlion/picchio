@@ -52,7 +52,7 @@ obj.prototype.fly = function(api,file,show) {
             console.log(RESPONSE);
         }
         else {
-            obj.prototype.error(err);
+            this.error(err);
         }
     });
 };
@@ -63,21 +63,23 @@ obj.prototype.fly = function(api,file,show) {
 
 obj.prototype.up = function(files, api, show) {
     if(!api && config.API.length == 0) {
-        obj.prototype.error("API KEY IS REQUIRED");
+        this.error("API KEY IS REQUIRED");
     }
     else if(!api) {
         api = config.API;
     }
+
+    var self = this;
 
     if(typeof files.constructor === Array) {
         files.forEach(function(file) {
             file = path.resolve(file);
             fs.exists(file,function(esiste) {
                 if(esiste) {
-                    obj.prototype.fly(api,file,show);
+                    self.fly(api,file,show);
                 }
                 else {
-                    obj.prototype.error(file+" DOESN'T EXISTS");
+                    self.error(file+" DOESN'T EXISTS");
                 }
             });
         });
@@ -86,10 +88,10 @@ obj.prototype.up = function(files, api, show) {
         filest = path.resolve(files);
         fs.exists(filest,function(esiste) {
             if(esiste) {
-                obj.prototype.fly(api,filest,show);
+                self.fly(api,filest,show);
             }
             else {
-                obj.prototype.error(filest+" DOESN'T EXISTS");
+                this.error(filest+" DOESN'T EXISTS");
             }
         });
     }
@@ -103,19 +105,21 @@ obj.prototype.putDown = function(api, file) {
 
 obj.prototype.down = function(files, api) {
     if(!api && config.API.length == 0) {
-        obj.prototype.error("API KEY IS REQUIRED");
+        this.error("API KEY IS REQUIRED");
     }
     else if(!api) {
         api = config.API;
     }
 
+    var self = this;
+
     if(typeof files.constructor === Array) {
         files.forEach(function(file) {
-            obj.prototype.putDown(api,file);
+            self.putDown(api,file);
         });
     }
     else {
-        obj.prototype.putDown(api, files);
+        this.putDown(api, files);
     }
 };
 
