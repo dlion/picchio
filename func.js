@@ -113,7 +113,7 @@ obj.prototype.down = function(files, api) {
 
     var self = this;
 
-    if(typeof files.constructor === Array) {
+    if(Array.isArray(files)) {
         files.forEach(function(file) {
             self.putDown(api,file);
         });
