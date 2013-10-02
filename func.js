@@ -1,4 +1,3 @@
-#!/bin/env node
 var     config  =   require('./config.json'),
         needle  =   require('needle'),
         fs      =   require('fs'),
